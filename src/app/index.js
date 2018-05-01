@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoItem from './todoitem';
+import AddItem from './additem';
 import './css/index.css'
 
 // Create Component
@@ -16,6 +17,7 @@ class TodoComponent extends React.Component{
       ],
     };
     this.onDelete = this.onDelete.bind(this);
+    this.onAdd = this.onAdd.bind(this);
   };
 
   render() {
@@ -23,8 +25,9 @@ class TodoComponent extends React.Component{
 
     return(
       <div id="todo-list">
-        <small>The busiest people have the most leisure...</small>
+        <p>The busiest people have the most leisure...</p>
         <ul>{newTodos}</ul>
+        <AddItem onAdd={this.onAdd}/>
       </div>
     );
   } // render
@@ -32,6 +35,13 @@ class TodoComponent extends React.Component{
   //Custom events
   onDelete(item) {
     const updatedTodos = this.state.todos.filter(todo => item !== todo);
+    this.setState({
+      todos: updatedTodos
+    });
+  }
+
+  onAdd(newItem){
+    const updatedTodos = [ ...this.state.todos, newItem ]
     this.setState({
       todos: updatedTodos
     });
