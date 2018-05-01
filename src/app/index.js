@@ -50,7 +50,7 @@ class TodoItem extends React.Component{
   }
 
   // Custom functions
-  handleDelete = (item) {
+  handleDelete(item) {
     this.props.onDelete(item);
   };
 }
