@@ -3,24 +3,37 @@ import ReactDOM from 'react-dom';
 
 // Create Component
 class TodoComponent extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [
+        'wash up',
+        'eat some cheese',
+        'take a nap',
+        'buy Flowers',
+      ],
+      totalItems: 3,
+    }
+  };
   render() {
+    let totalItems = setTimeout(() => {
+      this.setState({
+        totalItems: 4
+      })
+    }, 5000);
+    const newTodos = this.state.todos.map((todo, i) => <li key={i}>{todo}</li>);
+
     return(
-      <div>
-        <h2>{this.props.message}</h2>
-        <p> <strong>Cheese name:</strong> {this.props.cheese.name}</p>
-        <p> <strong>Cheese smell factor:</strong> {this.props.cheese.smellFactor}</p>
-        <p> <strong>Cheese price:</strong> {this.props.cheese.price}</p>
+      <div id="todo-list">
+        <small>The busiest people have the most leisure...</small>
+        <small>{this.state.totalItems}</small>
+        <ul>{newTodos}</ul>
+        {/*<ListComponent todos={this.state.todos} />*/}
       </div>
     );
-  }
-}
-
-const myCheese = {
-  name: 'Camembert',
-  smellFactor: 'Extreme pong',
-  price: '3.50',
+  } // render
 }
 
 //put component into html page
 
-ReactDOM.render(<TodoComponent message="I like cheese" cheese={myCheese} />, document.getElementById('todo-wrapper'));
+ReactDOM.render(<TodoComponent />, document.getElementById('todo-wrapper'));
