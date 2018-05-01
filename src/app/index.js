@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link, browserHistory } from 'react-router-dom';
 import TodoItem from './todoitem';
 import AddItem from './additem';
+import About from './about';
 import './css/index.css'
+
+const App = () => (
+  <Router  history={browserHistory}>
+    <div>
+      <Route exact path="/" component={TodoComponent}/>
+      <Route path="/about" component={About}/>
+    </div>
+  </Router>
+);
 
 // Create Component
 class TodoComponent extends React.Component{
@@ -25,6 +36,7 @@ class TodoComponent extends React.Component{
 
     return(
       <div id="todo-list">
+        <Link to="/about">About</Link>
         <p>The busiest people have the most leisure...</p>
         <ul>{newTodos}</ul>
         <AddItem onAdd={this.onAdd}/>
@@ -46,8 +58,20 @@ class TodoComponent extends React.Component{
       todos: updatedTodos
     });
   }
+
+  // lifecycle functions
+  componentWillMount() {
+    console.log('component will mount');
+  }
+  componentDidMount() {
+    console.log('component did mount');
+    //any grabbing of external data
+  }
+  componentWillUpdate() {
+    console.log('component will Update');
+  }
 }
 
 //put component into html page
 
-ReactDOM.render(<TodoComponent />, document.getElementById('todo-wrapper'));
+ReactDOM.render(<App />, document.getElementById('todo-wrapper'));
