@@ -12,25 +12,28 @@ class TodoComponent extends React.Component{
         'take a nap',
         'buy Flowers',
       ],
-      totalItems: 3,
-    }
+    };
+    this.onDelete = this.onDelete.bind(this);
   };
+
   render() {
-    let totalItems = setTimeout(() => {
-      this.setState({
-        totalItems: 4
-      })
-    }, 5000);
-    const newTodos = this.state.todos.map((todo, i) => <TodoItem key={i} item={todo} />);
+    const newTodos = this.state.todos.map((todo, i) => <TodoItem key={i} item={todo} onDelete={this.onDelete} />);
 
     return(
       <div id="todo-list">
         <small>The busiest people have the most leisure...</small>
-        <small>{this.state.totalItems}</small>
         <ul>{newTodos}</ul>
       </div>
     );
   } // render
+
+  //Custom events
+  onDelete(item) {
+    const updatedTodos = this.state.todos.filter(todo => item !== todo);
+    this.setState({
+      todos: updatedTodos
+    });
+  }
 }
 
 // Create Todo Item component
@@ -40,10 +43,16 @@ class TodoItem extends React.Component{
       <li>
         <div className="todo-item">
         <span className="item-name">{this.props.item}</span>
+        <span className="item-delete" onClick={() => this.handleDelete(this.props.item)}> X </span>
         </div>
       </li>
     )
   }
+
+  // Custom functions
+  handleDelete = (item) {
+    this.props.onDelete(item);
+  };
 }
 
 //put component into html page
