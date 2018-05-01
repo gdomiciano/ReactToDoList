@@ -21,17 +21,29 @@ class TodoComponent extends React.Component{
         totalItems: 4
       })
     }, 5000);
-    const newTodos = this.state.todos.map((todo, i) => <li key={i}>{todo}</li>);
+    const newTodos = this.state.todos.map((todo, i) => <TodoItem key={i} item={todo} />);
 
     return(
       <div id="todo-list">
         <small>The busiest people have the most leisure...</small>
         <small>{this.state.totalItems}</small>
         <ul>{newTodos}</ul>
-        {/*<ListComponent todos={this.state.todos} />*/}
       </div>
     );
   } // render
+}
+
+// Create Todo Item component
+class TodoItem extends React.Component{
+  render() {
+    return(
+      <li>
+        <div className="todo-item">
+        <span className="item-name">{this.props.item}</span>
+        </div>
+      </li>
+    )
+  }
 }
 
 //put component into html page
