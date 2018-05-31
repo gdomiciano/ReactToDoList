@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, browserHistory } from 'react-router';
 import TodoItem from './todoitem';
 import AddItem from './additem';
 import About from './about';
 import './css/index.css'
 
-const App = () => (
-  <Router  history={browserHistory}>
+
+
+  <Router history={browserHistory}>
     <div>
       <Route exact path="/" component={TodoComponent}/>
-      <Route path="/about" component={About}/>
+      <Route exact path="/about" component={About}/>
     </div>
   </Router>
 );

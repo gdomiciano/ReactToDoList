@@ -4,7 +4,7 @@
   "description": "Todo list inicial created from",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 8081",
+    "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 8081 --history-api-fallback",
     "start": "npm run build",
     "test": "test"
   },
